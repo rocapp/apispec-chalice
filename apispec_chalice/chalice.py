@@ -42,7 +42,7 @@ except ModuleNotFoundError:
         def iterkeys(d):
             for k, _ in iteritems(d):
                 yield k
-from apispec import Path
+from pathlib import Path
 from apispec.exceptions import APISpecError
 from apispec.utils import load_operations_from_docstring
 
