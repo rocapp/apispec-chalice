@@ -27,8 +27,21 @@ Passing a view function::
     #                  'x-extension': 'metadata'}}
 
 """
-
-from apispec.compat import iteritems, iterkeys
+try:
+    from apispec.compat import iteritems, iterkeys
+except ModuleNotFoundError:
+    from operator import methodcaller
+    try:
+        {}.viewitems()
+    except AttributeError:
+        # Py3, use items
+        iteritems = methodcaller('items')
+    else:
+        iteritems = methodcaller('viewitems')
+    finally:
+        def iterkeys(d):
+            for k, _ in iteritems(d):
+                yield k
 from apispec import Path
 from apispec.exceptions import APISpecError
 from apispec.utils import load_operations_from_docstring
