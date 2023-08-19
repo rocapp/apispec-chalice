@@ -46,7 +46,7 @@ from pathlib import Path
 from apispec.exceptions import APISpecError
 try:
     from apispec.utils import load_operations_from_docstring
-except ModuleNotFoundError:
+except (ModuleNotFoundError, ImportError):
     from apispec.yaml_utils import load_operations_from_docstring
 
 
