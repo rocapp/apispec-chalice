@@ -44,7 +44,10 @@ except ModuleNotFoundError:
                 yield k
 from pathlib import Path
 from apispec.exceptions import APISpecError
-from apispec.utils import load_operations_from_docstring
+try:
+    from apispec.utils import load_operations_from_docstring
+except ModuleNotFoundError:
+    from apispec.yaml_utils import load_operations_from_docstring
 
 
 def _route_for_view(current_app, view, path=Path(), operations=set()):
